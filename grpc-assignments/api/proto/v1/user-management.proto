@@ -1,0 +1,68 @@
+syntax="proto3";
+package v1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+	info: {
+		title: "user managements service";
+		version: "1.0";
+		contact: {
+			name: "grpc-assignments";
+			url: "";
+			email: "";
+        };
+    };
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+    responses: {
+		key: "404";
+		value: {
+			description: "Returned when the resource does not exist.";
+			schema: {
+				json_schema: {
+					type: STRING;
+				}
+			}
+		}
+	}
+};
+
+
+message User{
+    string Api=1;
+    string Name=2;
+    string Email=3;
+    string UserName=4;
+    string Qualification=5;
+    float Experience=6;
+    string Password=7;
+    int64 InvitationFlag=8;
+}
+message CreateUserResp{
+    string Api=1; 
+    int64 UserId=2;
+    string RespCode=3;
+    string Message=4;
+}
+message GetUserReq{
+    string Api=1;
+    string UserName=2;
+    string Password=3;
+
+}
+service UserManagment{
+    rpc CreateUser(User)returns(CreateUserResp){
+        option (google.api.http) = {
+            post: "/v1/user"
+            body:"*"
+        };
+    };
+    rpc GetUser(GetUserReq)returns(User){
+        option (google.api.http) = {
+            get: "/v1/user"
+        };
+    };
+}

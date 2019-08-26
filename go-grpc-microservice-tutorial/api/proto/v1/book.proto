@@ -1,0 +1,19 @@
+syntax="proto3";
+package v1;
+
+
+message Book{
+string Api=1;
+int64 BookID=2;
+string BookName=3;
+string BookAuthor=4;
+int64 Pages=5;
+}   
+
+service BookService{
+    rpc CreateBookRecord(Book)returns(Book);
+    rpc UpdateBookRecord(Book)returns(Book);
+    rpc DeleteBookRecord(Book)returns(Book);
+    rpc ReadBookRecord(Book)returns(Book);
+    rpc ReadAllBook(Book)returns(Book);
+};

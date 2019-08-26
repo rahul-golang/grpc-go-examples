@@ -1,0 +1,1 @@
+./server -grpc-port=9090 -db-host=localhost:3306 -db-user=rahul -db-password=password -db-schema=grpc_example

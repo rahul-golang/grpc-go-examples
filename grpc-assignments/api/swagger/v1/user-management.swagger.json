@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user managements service",
+    "version": "1.0",
+    "contact": {
+      "name": "grpc-assignments"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/user": {
+      "get": {
+        "operationId": "GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1User"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "format": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Api",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "UserName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserManagment"
+        ]
+      },
+      "post": {
+        "operationId": "CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserResp"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "format": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1User"
+            }
+          }
+        ],
+        "tags": [
+          "UserManagment"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1CreateUserResp": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "RespCode": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Qualification": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "number",
+          "format": "float"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "InvitationFlag": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

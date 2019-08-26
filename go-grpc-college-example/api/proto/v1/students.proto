@@ -1,0 +1,34 @@
+syntax="proto3";
+package v1;
+
+message API{
+    string Api=1;
+}
+
+message Student{
+    int64 RollNo=1;
+    string Name=2;
+    string Department=3;
+}
+message CreateStudentReq{
+   API Api=1;
+   Student Student=2;
+}
+
+message CreateStudentResp{
+    API Api=1;
+    Student Student=2;
+ }
+
+ message ReadAllStudentRecordsResp{
+     API Api=1;
+    repeated Student Student=2;
+ }
+ message ReadAllStudentRecordsReq{
+    API Api=1;
+ }
+
+ service StudentService{
+    rpc CreateNewStudent(CreateStudentReq)returns(CreateStudentResp);
+    rpc ReadAllStudentRecords(stream  ReadAllStudentRecordsReq) returns (stream  ReadAllStudentRecordsResp);
+ }

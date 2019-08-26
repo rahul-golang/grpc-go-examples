@@ -1,0 +1,107 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "book.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/bookservice/book": {
+      "post": {
+        "operationId": "CreateBookRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Book"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1Book"
+            }
+          }
+        ],
+        "tags": [
+          "BookService"
+        ]
+      }
+    },
+    "/v1/bookservice/book/all": {
+      "get": {
+        "operationId": "ReadAllBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadAllBookResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Api",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BookService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1Book": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "BookID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "BookName": {
+          "type": "string"
+        },
+        "BookAuthor": {
+          "type": "string"
+        },
+        "Pages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ReadAllBookResp": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "book": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Book"
+          }
+        }
+      }
+    }
+  }
+}

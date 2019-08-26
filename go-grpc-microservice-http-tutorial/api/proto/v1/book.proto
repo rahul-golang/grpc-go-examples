@@ -1,0 +1,43 @@
+syntax="proto3";
+package v1;
+
+
+import "protoc-gen-swagger/options/annotations.proto";
+import "google/api/annotations.proto";
+
+message Book{
+    string Api=1;
+    int64 BookID=2;
+    string BookName=3;
+    string BookAuthor=4;
+    int64 Pages=5;
+}   
+message ReadBookRecordReq{
+    string Api= 1;
+    string BookID=2;
+    
+}
+message ReadAllBookResp{
+    string Api=1;
+    repeated Book book=2;
+}
+message ReadAllBookReq{
+    string Api=1;
+}
+service BookService{
+    rpc CreateBookRecord(Book)returns(Book){
+        option (google.api.http) = {
+               post: "/v1/bookservice/book",
+               body:"*"
+            };
+    };
+    rpc UpdateBookRecord(Book)returns(Book);
+    rpc DeleteBookRecord(Book)returns(Book);
+    rpc ReadBookRecord(ReadBookRecordReq)returns(Book);
+    rpc ReadAllBook(ReadAllBookReq)returns(ReadAllBookResp){
+        option (google.api.http) = {
+            get: "/v1/bookservice/book/all",
+            
+         };
+    };
+};

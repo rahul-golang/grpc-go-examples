@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "library.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/libraryservice/library": {
+      "post": {
+        "operationId": "IssueBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1IssueBookResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1IssueBookReq"
+            }
+          }
+        ],
+        "tags": [
+          "LibraryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1Book": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "BookID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "BookName": {
+          "type": "string"
+        },
+        "BookAuthor": {
+          "type": "string"
+        },
+        "Pages": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1IssueBookReq": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "book": {
+          "$ref": "#/definitions/v1Book"
+        },
+        "IssuerName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1IssueBookResp": {
+      "type": "object",
+      "properties": {
+        "Api": {
+          "type": "string"
+        },
+        "Book": {
+          "$ref": "#/definitions/v1Book"
+        },
+        "IssuerName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

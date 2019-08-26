@@ -1,0 +1,31 @@
+syntax="proto3";
+package v1;
+import "book.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "google/api/annotations.proto";
+
+message IssueBookReq{
+    string Api= 1;
+    Book book=2;    
+    string IssuerName=3;
+    
+
+
+
+}
+message IssueBookResp{
+    string Api= 1;
+    Book Book=2;
+    string IssuerName=3;
+    string Status=4;
+    
+
+}
+service LibraryService{
+    rpc IssueBook(IssueBookReq) returns (IssueBookResp){
+        option (google.api.http) = {
+            post: "/v1/libraryservice/library",
+            body:"*"
+         };
+    };
+}
